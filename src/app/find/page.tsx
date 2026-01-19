@@ -1,16 +1,21 @@
 "use client";
 import { useState, useEffect } from "react";
 import techniciansData from "@/data/technicians.json";
-import TechCard from "";
+import TechCard from "../TechCard";
+
+interface Technician {
+  id: string;
+  [key: string]: unknown;
+}
 
 export default function FindPage() {
-  const [list, setList] = useState<any[]>([]);
+  const [list, setList] = useState<Technician[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // We simulate a 1-second delay to act like a real database
     const timer = setTimeout(() => {
-      setList(techniciansData);
+      setList(Array.isArray(techniciansData) ? techniciansData : []);
       setLoading(false);
     }, 1000);
 
